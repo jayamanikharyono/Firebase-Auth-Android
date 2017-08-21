@@ -1,5 +1,6 @@
 package com.kreaciouser.firebasetest;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.kreaciouser.firebasetest.Model.User;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     @BindView(R.id.progress_bar) ProgressBar progressBar;
     @BindView(R.id.register_button) Button registerButton;
     FirebaseAuth auth;
+    DatabaseReference firebaseDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
         auth = FirebaseAuth.getInstance();
+        firebaseDB = FirebaseDatabase.getInstance().getReference("fir-test-8b560");
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,12 +52,25 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
                 progressBar.setVisibility(View.VISIBLE);
-                String email = emailInput.getText().toString();
+                final String email = emailInput.getText().toString();
                 String password = passwordInput.getText().toString();
                 Task<AuthResult> authResultTask = auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            String uid = auth.getCurrentUser().getUid();
+                            String displayName = displayNameInput.getText().toString().trim();
+                            String status =  statusMessageInput.getText().toString().trim();
+                            firebaseDB.child("users").child(uid).setValue(new User(uid, email, displayName, status), new DatabaseReference.CompletionListener() {
+                                @Override
+                                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                                    startActivity( new Intent(RegisterActivity.this, LoginActivity.class));
+                                }
+                            });
+                        }
+                        else{
 
+                        }
                     }
                 });
             }
