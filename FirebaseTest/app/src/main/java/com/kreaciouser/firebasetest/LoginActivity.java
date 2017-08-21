@@ -46,10 +46,12 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            progressBar.setVisibility(View.GONE);
+                            startActivity(new Intent(getApplicationContext() , MainActivity.class));
                             finish();
                         }
                         else {
+                            progressBar.setVisibility(View.GONE);
                             emailInput.setError("");
                             passwordInput.setError("");
                         }

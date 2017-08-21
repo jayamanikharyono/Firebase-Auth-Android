@@ -5,7 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,6 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
+    @BindView(R.id.progress_bar) ProgressBar progressBar;
     @BindView(R.id.display_name_text) TextView displayName;
     @BindView(R.id.status_message_text) TextView statusMessage;
     @BindView(R.id.change_email_button) Button changeEmailButton;
@@ -29,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth auth;
     DatabaseReference firebaseDB;
     FirebaseUser firebaseUser;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +50,10 @@ public class MainActivity extends AppCompatActivity {
         firebaseDB.child("users").child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                    User user = dataSnapshot.getValue(User.class);
+                    user = dataSnapshot.getValue(User.class);
                     displayName.setText(user.getDisplayName());
                     statusMessage.setText(user.getStatus());
-
+                    progressBar.setVisibility(View.GONE);
             }
 
             @Override
@@ -55,11 +61,20 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        changePasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                auth.sendPasswordResetEmail(user.getEmail());
+                startActivity(new Intent(getApplicationContext(), ChangePasswordActivity.class));
+            }
+        });
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 auth.signOut();
+                onBackPressed();
             }
         });
+
     }
 }

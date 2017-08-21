@@ -64,11 +64,13 @@ public class RegisterActivity extends AppCompatActivity {
                             firebaseDB.child("users").child(uid).setValue(new User(uid, displayName, email, status), new DatabaseReference.CompletionListener() {
                                 @Override
                                 public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                                    startActivity( new Intent(RegisterActivity.this, LoginActivity.class));
+                                    progressBar.setVisibility(View.GONE);
+                                    onBackPressed();
                                 }
                             });
                         }
                         else{
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(getApplicationContext(), "Register Error", Toast.LENGTH_SHORT).show();
                         }
                     }

@@ -10,4 +10,6 @@
     <string name="sign_out_btn">Sign Out</string>
     <string name="change_email_btn">Change Email</string>
     <string name="change_password">Change Password</string>
+    <string name="new_password_hint">New Password</string>
+    <string name="new_confirm_password_hint">New Confirm Password</string>
 </resources>

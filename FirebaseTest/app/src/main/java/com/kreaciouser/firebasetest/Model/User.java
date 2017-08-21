@@ -3,8 +3,18 @@ package com.kreaciouser.firebasetest.Model;
 /**
  * Created by kreaciouser on 8/21/17.
  */
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-
+/*
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+*/
 public class User {
     private String uid;
     private String displayName;

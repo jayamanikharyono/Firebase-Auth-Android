@@ -16,14 +16,21 @@
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginTop="30dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
             android:src="@drawable/logo"/>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/display_name_hint"
-            android:layout_marginTop="30dp"/>
+            android:layout_marginTop="30dp"
+            android:text="@string/display_name_hint"/>
 
         <TextView
             android:id="@+id/display_name_text"
@@ -36,40 +43,32 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/status_hint"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:text="@string/status_hint"/>
         <TextView
             android:id="@+id/status_message_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/status_hint"
             android:textColor="@color/colorButton"
-            android:textSize="18sp"
-            />
+            android:textSize="18sp" />
+
 
         <Button
             android:id="@+id/change_password_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@color/colorButton"
             android:text="@string/change_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:background="@color/colorButton"
-            android:layout_marginTop="30dp"/>
-        <Button
-            android:id="@+id/change_email_button"
-            android:text="@string/change_email_btn"
-            android:layout_width="match_parent"
-            android:background="@color/colorButton"
-            android:textColor="@android:color/white"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"/>
+            android:textColor="@android:color/white"/>
         <Button
             android:id="@+id/sign_out_button"
-            android:text="@string/sign_out_btn"
             android:layout_width="match_parent"
-            android:background="@color/colorButton"
-            android:textColor="@android:color/white"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:background="@color/colorButton"
+            android:text="@string/sign_out_btn"
+            android:textColor="@android:color/white"/>
     </LinearLayout>
 </RelativeLayout>
