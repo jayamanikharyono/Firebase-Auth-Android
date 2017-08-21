@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Firebase Test</string>
+    <string name="login_btn">Login</string>
+    <string name="register_text">Dont have any account ?</string>
+    <string name="register_btn">Register</string>
+    <string name="email_hint">Email Address</string>
+    <string name="password_hint">Password</string>
+    <string name="display_name_hint">Display Name</string>
+    <string name="status_hint">Status Message</string>
 </resources>
