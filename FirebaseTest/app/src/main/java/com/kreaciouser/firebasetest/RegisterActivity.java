@@ -38,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
         auth = FirebaseAuth.getInstance();
-        firebaseDB = FirebaseDatabase.getInstance().getReference("fir-test-8b560");
+        firebaseDB = FirebaseDatabase.getInstance().getReference();
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
                             String uid = auth.getCurrentUser().getUid();
                             String displayName = displayNameInput.getText().toString().trim();
                             String status =  statusMessageInput.getText().toString().trim();
-                            firebaseDB.child("users").child(uid).setValue(new User(uid, email, displayName, status), new DatabaseReference.CompletionListener() {
+                            firebaseDB.child("users").child(uid).setValue(new User(uid, displayName, email, status), new DatabaseReference.CompletionListener() {
                                 @Override
                                 public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                                     startActivity( new Intent(RegisterActivity.this, LoginActivity.class));
@@ -69,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
                             });
                         }
                         else{
-
+                            Toast.makeText(getApplicationContext(), "Register Error", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

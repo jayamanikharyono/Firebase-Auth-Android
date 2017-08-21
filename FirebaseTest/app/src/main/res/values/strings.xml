@@ -7,4 +7,7 @@
     <string name="password_hint">Password</string>
     <string name="display_name_hint">Display Name</string>
     <string name="status_hint">Status Message</string>
+    <string name="sign_out_btn">Sign Out</string>
+    <string name="change_email_btn">Change Email</string>
+    <string name="change_password">Change Password</string>
 </resources>
