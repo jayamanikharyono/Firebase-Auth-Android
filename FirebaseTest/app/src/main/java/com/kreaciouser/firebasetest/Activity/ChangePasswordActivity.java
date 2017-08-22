@@ -1,4 +1,4 @@
-package com.kreaciouser.firebasetest;
+package com.kreaciouser.firebasetest.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.kreaciouser.firebasetest.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,6 +39,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 if(newPasswordInput.getText().toString().equals(newConfirmPasswordInput.getText().toString())){
                     auth.getCurrentUser().updatePassword(newPasswordInput.getText().toString().trim());
                 }
+                onBackPressed();
             }
         });
     }

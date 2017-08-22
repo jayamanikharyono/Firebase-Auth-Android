@@ -1,6 +1,5 @@
-package com.kreaciouser.firebasetest;
+package com.kreaciouser.firebasetest.Activity;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.kreaciouser.firebasetest.Model.User;
+import com.kreaciouser.firebasetest.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

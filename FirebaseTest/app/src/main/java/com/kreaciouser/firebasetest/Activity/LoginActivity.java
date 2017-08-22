@@ -1,4 +1,4 @@
-package com.kreaciouser.firebasetest;
+package com.kreaciouser.firebasetest.Activity;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.kreaciouser.firebasetest.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.email_text) EditText emailInput;
     @BindView(R.id.password_text) EditText passwordInput;
     @BindView(R.id.login_button) Button loginButton;
+    @BindView(R.id.reset_password_button) Button resetPasswordButton;
     @BindView(R.id.register_button) Button registerButton;
     @BindView(R.id.progress_bar) ProgressBar progressBar;
     FirebaseAuth auth;
@@ -29,9 +31,12 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        auth = FirebaseAuth.getInstance();
+        if(auth.getCurrentUser() != null){
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        }
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        auth = FirebaseAuth.getInstance();
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,5 +71,19 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
+        resetPasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), EmailResetActivity.class));
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(auth.getCurrentUser() != null){
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        }
     }
 }

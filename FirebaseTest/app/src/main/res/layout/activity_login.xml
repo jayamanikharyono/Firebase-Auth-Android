@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:padding="16dp"
-    tools:context="com.kreaciouser.firebasetest.LoginActivity">
+    tools:context="com.kreaciouser.firebasetest.Activity.LoginActivity">
 
     <LinearLayout
         android:layout_marginTop="30dp"
@@ -67,7 +67,14 @@
             android:textColor="@android:color/white"
             android:background="@color/colorButton"
             android:layout_marginTop="30dp"/>
-
+        <Button
+            android:id="@+id/reset_password_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:text="@string/reset_password"
+            android:textColor="@color/colorButton"
+            android:textAllCaps="false"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
