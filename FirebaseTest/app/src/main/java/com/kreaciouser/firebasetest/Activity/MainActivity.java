@@ -4,11 +4,15 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FacebookAuthCredential;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -18,6 +22,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.kreaciouser.firebasetest.Model.User;
 import com.kreaciouser.firebasetest.R;
+
+import java.security.AuthProvider;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,20 +53,30 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(mainToolbar);
         mainToolbar.setTitle("@string/app_title");
-        firebaseDB.child("users").child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                    user = dataSnapshot.getValue(User.class);
-                    displayName.setText(user.getDisplayName());
-                    statusMessage.setText(user.getStatus());
-                    progressBar.setVisibility(View.GONE);
-            }
+        try{
+            firebaseDB.child("users").child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    try{
+                        user = dataSnapshot.getValue(User.class);
+                        displayName.setText(user.displayName);
+                        statusMessage.setText(user.status);
+                        progressBar.setVisibility(View.GONE);
+                    }
+                    catch (NullPointerException npe){
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                    }
+                }
 
-            }
-        });
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+        catch (NullPointerException npe){
+
+        }
         changePasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,6 +87,13 @@ public class MainActivity extends AppCompatActivity {
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.i("Provider ID", auth.getCurrentUser().getProviders().toString());
+                if(auth.getCurrentUser().getProviders().toString().equals("[facebook.com]")){
+                    LoginManager.getInstance().logOut();
+                }
+                else if (auth.getCurrentUser().getProviderId().equals("google")){
+
+                }
                 auth.signOut();
                 onBackPressed();
             }

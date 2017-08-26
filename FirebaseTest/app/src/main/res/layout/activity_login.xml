@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:padding="16dp"
+    android:padding="24dp"
     tools:context="com.kreaciouser.firebasetest.Activity.LoginActivity">
 
     <LinearLayout
@@ -75,6 +75,16 @@
             android:text="@string/reset_password"
             android:textColor="@color/colorButton"
             android:textAllCaps="false"/>
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/facebook_login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="16sp"
+            android:text="@string/login_with_facebook">
+        </com.facebook.login.widget.LoginButton>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

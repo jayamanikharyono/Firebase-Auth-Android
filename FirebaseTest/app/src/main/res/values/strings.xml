@@ -1,4 +1,8 @@
 <resources>
+
+    <string name="facebook_app_id">140877289852815</string>
+    <string name="fb_login_protocol_scheme">fb140877289852815</string>
+
     <string name="app_name">Firebase Test</string>
     <string name="login_btn">Login</string>
     <string name="register_text">Dont have any account ?</string>
@@ -15,4 +19,5 @@
     <string name="reset_password">Reset Password</string>
     <string name="email_address">Email Address</string>
     <string name="app_title">Firebase Test</string>
+    <string name="login_with_facebook">Login with Facebook</string>
 </resources>

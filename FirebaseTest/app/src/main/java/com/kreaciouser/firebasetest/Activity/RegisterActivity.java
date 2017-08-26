@@ -61,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
                             String uid = auth.getCurrentUser().getUid();
                             String displayName = displayNameInput.getText().toString().trim();
                             String status =  statusMessageInput.getText().toString().trim();
-                            firebaseDB.child("users").child(uid).setValue(new User(uid, displayName, email, status), new DatabaseReference.CompletionListener() {
+                            firebaseDB.child("users").child(uid).setValue(new User(uid," ", displayName, email, status), new DatabaseReference.CompletionListener() {
                                 @Override
                                 public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                                     progressBar.setVisibility(View.GONE);
